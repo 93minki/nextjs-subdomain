@@ -28,7 +28,7 @@ app.prepare().then(() => {
 
     if (isMobile) {
       if (req.hostname === "https://nextjs-subdomain-chi.vercel.app/") {
-        console.log("Mobile device detected! Redirecting...");
+        console.debug("Mobile device detected! Redirecting...");
         return res.redirect(
           301,
           "https://m.nextjs-subdomain-chi.vercel.app/" + req.url
@@ -41,26 +41,26 @@ app.prepare().then(() => {
   });
 
   mainServer.get("/", (req: DeviceRequest, res: Response) => {
-    console.log("Main Server Active!", req.path);
+    console.debug("Main Server Active!", req.path);
     const isMobile =
       req.device.type === "phone" || req.device.type === "tablet";
 
     if (isMobile) {
-      console.log("Mobile device detected!");
+      console.debug("Mobile device detected!");
       return mobileServer(req, res);
     } else {
-      console.log("PC device detected!");
+      console.debug("PC device detected!");
       return pcServer(req, res);
     }
   });
 
   mobileServer.get("/", (req: DeviceRequest, res: Response) => {
-    console.log("mobile / hello!", req.path);
+    console.debug("mobile / hello!", req.path);
     return app.render(req, res, "/mobile", req.query as NextParsedUrlQuery);
   });
 
   mobileServer.get("/*", (req: DeviceRequest, res: Response) => {
-    console.log("mobile * hello!", req.path);
+    console.debug("mobile * hello!", req.path);
     return app.render(
       req,
       res,
@@ -70,12 +70,12 @@ app.prepare().then(() => {
   });
 
   mobileServer.all("*", (req: DeviceRequest, res: Response) => {
-    console.log("mobile All hello!");
+    console.debug("mobile All hello!");
     return handle(req, res);
   });
 
   pcServer.get("/*", (req: DeviceRequest, res: Response) => {
-    console.log("PC * Hello!, req, res", req.path);
+    console.debug("PC * Hello!, req, res", req.path);
     return app.render(
       req,
       res,
@@ -85,12 +85,12 @@ app.prepare().then(() => {
   });
 
   pcServer.get("/", (req: DeviceRequest, res: Response) => {
-    console.log("PC / Hello!, req, res", req.path);
+    console.debug("PC / Hello!, req, res", req.path);
     return app.render(req, res, "/", req.query as NextParsedUrlQuery);
   });
 
   pcServer.all("*", (req: DeviceRequest, res: Response) => {
-    console.log("PCServer All Hello!");
+    console.debug("PCServer All Hello!");
     return handle(req, res);
   });
 
@@ -99,6 +99,6 @@ app.prepare().then(() => {
 
   mainServer.listen(port, (err?: Error) => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
+    console.debug(`> Ready on http://localhost:${port}`);
   });
 });
