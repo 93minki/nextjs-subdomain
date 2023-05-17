@@ -27,11 +27,11 @@ app.prepare().then(() => {
       req.device.type === "phone" || req.device.type === "tablet";
 
     if (isMobile) {
-      if (req.hostname === "https://nextjs-subdomain-chi.vercel.app") {
+      if (req.hostname === "nextjs-subdomain-chi.vercel.app") {
         console.debug("Mobile device detected! Redirecting...");
         return res.redirect(
           301,
-          "https://nextjs-subdomain-chi.vercel.app" + req.url
+          "https://m.nextjs-subdomain-chi.vercel.app" + req.url
         );
       }
       return mobileServer(req, res);
@@ -95,7 +95,7 @@ app.prepare().then(() => {
   });
 
   mainServer.use(vhost("nextjs-subdomain-chi.vercel.app", pcServer));
-  mainServer.use(vhost("nextjs-subdomain-chi.vercel.app", mobileServer));
+  mainServer.use(vhost("m.nextjs-subdomain-chi.vercel.app", mobileServer));
 
   mainServer.listen(port, (err?: Error) => {
     if (err) throw err;
