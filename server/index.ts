@@ -27,11 +27,11 @@ app.prepare().then(() => {
       req.device.type === "phone" || req.device.type === "tablet";
 
     if (isMobile) {
-      if (req.hostname === "https://nextjs-subdomain-chi.vercel.app/") {
+      if (req.hostname === "https://nextjs-subdomain-chi.vercel.app") {
         console.debug("Mobile device detected! Redirecting...");
         return res.redirect(
           301,
-          "https://m.nextjs-subdomain-chi.vercel.app/" + req.url
+          "https://m.nextjs-subdomain-chi.vercel.app" + req.url
         );
       }
       return mobileServer(req, res);
