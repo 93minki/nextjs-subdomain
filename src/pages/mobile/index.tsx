@@ -9,6 +9,7 @@ const MobilePage = () => {
 
   return (
     <div>
+      <div>Vercel Deploy Version</div>
       <h1>This is Mobile Page!</h1>
       <button onClick={buttonClickHandler}>
         {click ? "Clicked!" : "Click Me!"}

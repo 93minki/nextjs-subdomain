@@ -7,6 +7,7 @@ const Home = () => {
   };
   return (
     <div>
+      <div>Vercel Deploy Version</div>
       <h1>This is PC/Tablet Page!</h1>
       <button onClick={buttonClickHandler}>Count Up! {count}</button>
     </div>
